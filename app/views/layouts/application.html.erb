@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShareYoutubeVideoV2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to 'Share Youtube Video', root_path, class: 'navbar-brand' %>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Videos', root_path %></li>
+          <% if logged_in? %>
+            <li><%= link_to 'Add Video', new_video_path %></li>
+          <% end %>
+        </ul>
+        <div class="pull-right text-info">
+          <% if logged_in? %>
+            <h4>Welcome <%= current_user.username %></h4>
+            <%= link_to 'Log Out', logout_path, method: :delete %>
+          <% end %>
+          <% unless logged_in? %>
+            <%= link_to 'Log In', login_path %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>
